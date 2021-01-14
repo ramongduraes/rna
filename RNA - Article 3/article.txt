@@ -1,0 +1,32 @@
+=== Codigo ===
+
+DONE
+- Baixar dados do artigo do concept map
+- Verificar se as janelas de dados estao funcionando, manter tamanho da janela como parametro
+- Limpar e tratar dados do artigo do concept map
+- Aprender mini batch perceptron
+- Avaliar performance do perceptron normal nele
+- Avaliar performance do modelo desenvolvido
+TODO
+
+
+=== Artigo === 
+
+DONE
+- Ler o enunciado
+TODO
+- Aprender a colocar referencias e colocar as do TODO 
+- Pegar referencias relevantes do tcc, pegar a do concept drift map tb
+- ref do youtube
+- Resultados
+- Colocar tabela com os bancos de dados
+- Conclusão e trabalhos futuros
+
+
+Considerações
+
+- Só atributos contínuos foram levados em consideração
+- Requires normalization
+- Drift value not between 0 and 1, requires manual tuning
+- Window size also requires tuning
+- Duas mudanças em relação ao concept drift map: min, max e mean (adiciona um parametro e torna mais geral), uso de múltiplos modelos

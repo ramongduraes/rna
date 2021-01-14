@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc} 
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{Redes Neurais Artificiais - Exercicios 3 e 4}
+\author{Ramon Durães, 2019720188}
+
+\maketitle
+%\tableofcontents
+
+\section{Exercicio 3 - ELM}
+\subsection{Subsection}
+
+<<echo=TRUE, fig=TRUE>>=
+# Exercício ELMs Ramon DUrães
+
+rm(list=ls())
+library("rgl"); 
+library(e1071); 
+library(ggplot2);
+
+# Loading and Visualizing
+load("../data2classXOR.txt")
+plot(X[,1], X[,2], col=Y+2)
+@
+
+<<echo=TRUE, fig=TRUE>>=
+# Calculating H and Hinv
+Xaug <- cbind(replicate(nc*4,1),X)
+Z <- replicate(5, runif(3,-0.5, 0.5))
+H <- tanh(Xaug %*% Z)
+Hinv <- solve(t(H) %*% H) %*% t(H)
+
+# Calculating W
+W <- Hinv %*% Y
+
+# Classifying new data
+Xnew <- cbind(replicate(nc*4,1),X_t)
+Yhat <- tanh(Xnew %*% Z) %*% W
+qplot(X_t[,1], X_t[,2], colour=sign(Yhat))
+
+@
+
+<<echo=TRUE, fig=TRUE>>=
+# Generating surface
+xseq <- seq(-2, 10, 0.1)
+lseq <- length(xseq)
+MZ <- matrix(nrow=lseq, ncol=lseq)
+for (i in 1:lseq){
+  for(j in 1:lseq){
+    x1x2 <- as.matrix((cbind(1,xseq[i], xseq[j])))
+    MZ[i, j] <- sign(tanh(x1x2 %*% Z)%*%W)
+  }
+}
+
+
+#persp3d(x= xseq, y = xseq, z = MZ, col="blue")
+
+plot(X_t[,1], X_t[,2], xlim=c(0,6), ylim=c(0,6))
+par(new=T)
+contour(x= xseq, y=xseq, z=MZ, xlim=c(0,6), ylim=c(0,6))
+@
+
+\section{Exercicio 4}
+\subsection{Subsection}
+
+akaaakka
+
+<<echo=TRUE>>=
+# Exercício RBFs 
+
+library("stats")
+n_centers <- 4
+clusters <- kmeans(X, centers = n_centers)
+# str(clusters)
+# clusters$centers
+
+
+#pdfnvar <- function(x, m, K, n){
+#  ((1/sqrt((2*pi)^n*(det(K)))))*exp(-0.5*(t(x-m) %*% 
+#                                            (solve(K)) %*% (x-m))))
+#}
+@
+
+\end{document}
